@@ -2,7 +2,7 @@
 const passport = require('passport');
 const User = require('../models/user');
 const googleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const secret = require('../secret/secretfile');
+//const secret = require('../secret/secretfile');
 
 passport.serializeUser((user, done) => {
 	done(null, user.id);//gets the user id and saves it in the session
