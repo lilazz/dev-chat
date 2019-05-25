@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+
+		<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/fontawesome.min.css">-->
+
+<link rel="stylesheet" href="/css/group.css">
+
+</head>
+<body>
+	<%- include ../partials/navbar.ejs %>	
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<input type="hidden" id="nameUser" value="<%= user.userName %>">
+			<input type="hidden" id="nameImg" value="<%= user.userImage %>">
+			<div class="chat-container">
+			<div class="row">
+				<div class="col-sm-4 col-md-3 mob-clearfix">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card-container">
+								<div class="card">
+									<div class="front">
+										<div class="cover">
+											
+										</div>
+									 		<div class=" user cover-image">
+									 			<img src="https://zmeeva-chatapp.s3.amazonaws.com/<%= user.userImage %>" class="img-circle" alt="">
+									 		</div>
+									 		<div class="content">
+									 			<div class="main">
+									 				<h3 class="name"><%= lodash.upperCase(user.userName) %></h3>
+									 				<p class="profession-online">
+									 					<i class="fa fa-circle online" aria-hidden="true"></i>
+									 					Online
+									 				</p>
+									 				<p class="text-center">
+									 					<%= user.about %>
+									 				</p>
+									 			</div>
+									 			<div class="footer">
+									 				<i class="fa fa-mail-forvard"></i>
+									 				<a style="text-decoration: none;color: #4aa1f3;" href="/profile/<%= user.userName %>">
+									 					View My Profile
+									 				</a>
+									 			</div>
+									 		</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 10px;">
+						<div class="col-md-12">
+							<div class="card-container">
+								<div class="card">
+									<div class="front">
+										<div class="content main-scroll">
+											<div class="main" id="main-scroll">
+												<p class="friends" style="margin-bottom: 0px;">
+													Online Friends <span id="numOfFriends"></span>
+												</p>
+												<hr style="margin-top: 10px" />
+												<% if(data.friendsList.length > 0 ) { %>
+													<% lodash.forEach(data.friendsList, function(val) { %>
+
+													<div class="friend hidden">@<%= val.friendName %></div>
+													<% }) %>
+												<% } %>
+												<div class="onlineFriends"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-5 col-md-6 message-section">
+					<div class="row">
+						<div class="new-message-head">
+							<div class="pull-left">
+								<button id="receiver-name">
+									
+								</button>
+							</div>
+							<div class="pull-right">
+								
+							</div>	
+						</div>
+						<div class="chat-area">
+							<ul id="messages" class="list-unstyled">
+								<% if(chatGroup.length >0) { %>
+								<% lodash.forEach(chatGroup, function(val){ %>
+								<% if(name === val.receiver.userName.toLowerCase()) { %>
+
+								<li class="left">
+									<span class="chat-img1 pull-left">
+										<img class="img-circle" src="http://placehold.it/300x300" alt="">
+									</span>
+									<div class="chat-body1">
+										<span class="chat-name"><%= val.senderName %></span>
+										<br>
+										<%= val.message %>
+									</div>
+								</li>
+								<% }else if(name === val.sender.userName.toLowerCase()){ %>
+
+								<li class="left">
+									<span class="chat-img1 pull-left">
+										<img class="img-circle" src="http://placehold.it/300x300" alt="">
+									</span>
+									<div class="chat-body1">
+										<span class="chat-name"><%= val.senderName %></span>
+										<br>
+										<%= val.message %>
+									</div>
+								</li>
+								<% } %>
+								<% }) %>
+								<% } %>
+							</ul>
+							<script id="messageTemplate" type="text/template">
+								<li class="left">
+									<span class="chat-img1 pull-left">
+										<img class="img-circle" src="http://placehold.it/300x300" alt="">
+									</span>
+									<div class="chat-body1">
+										<span class="chat-name">{{ sender }}</span>
+										<br>
+										{{ text }}
+									</div>
+								</li>
+							</script>
+						</div>
+						<div class="message-write">
+							<form  id="messageForm" method="post">
+								<textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
+								<div class="clearfix"></div>
+								<div class="chat-bottom">
+									<button id="send-message" class="pull-right btn btn-primary" style="background: #4aa1f3;">Send
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+<!--				<div class="col-sm-3 col-md-3 mob-50 mob-clearfix">
+					<div class="new-message-head">
+						<div class="pull-left">
+							<button class="club-fans">
+								<i class="fa fa-users" aria-hidden="true" style="padding-right: 15px; color: #4aa1f3 !important; "></i>
+									Online Club Fans <span id="numValue"></span>
+							</button>
+						</div>
+					</div>
+					<div class="gr-rightsidebar">
+						<div id="myModal" class="modal fade" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 class="modal-title" id="name"></h3>
+									</div>
+									<div class="modal-body">
+										<form action="" method="get" id="addFriend">
+											<input type="hidden" name="receiverName" id="receiverName" value="">
+											<input type="hidden" name="senderName" id="senderName" value="<%= user.userName %>">
+											<button type="submit" id="frientAdd" class="btn add">
+												<i class="fa fa-user"></i>Add Friend
+											</button>
+											<a id="nameLink" class="btn">View Profile</a>
+											<div id="myTest"></div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div> 
+						<div class="col-md-12" id="main">
+							<div id="users"></div>
+						</div>
+					</div>
+				</div>-->
+			</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/messageLink.js"></script>
+<script src="/js/privateChat/pm.js"></script>
+
+
+<script src="/js/group/sendRequest.js"></script>
+<script src="/js/global.js"></script>
+<!--<script src="/js/params.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
+
+</body>
+</html>

@@ -1,1 +1,1 @@
-test
+Dev-chat is a char application for software developers

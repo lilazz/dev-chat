@@ -1,0 +1,64 @@
+.profile-usertitle{
+	color: gray;
+	text-align: center;
+
+}
+
+.profile-usermenu{
+	color: #4aa1f3;
+}
+.profile-sidebar{
+	background: white;
+	padding: 30px;
+	-webkit-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	-moz-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	-ms-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+}
+
+.profile-signup{
+	background: white;
+	padding: 30px;
+	-webkit-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	-moz-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	-ms-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+}
+.profile-signup .form .form-control{
+	margin-bottom: 20px;
+}
+
+.save-profile-btn{
+	background: #03A9F4;
+	border: #3bb5ec;
+	width: 100%;
+	text-shadow: none;
+	color: white;
+	margin-top: 40px;
+}
+.profile-settings-friends{
+	background: white;
+	padding: 30px;
+	-webkit-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	-moz-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	-ms-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+	box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+}
+
+.img-user{
+	width: 90%;
+	margin-left: 5%;
+}
+
+.user-display{
+							background: white;
+							padding:20px;
+							-webkit-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+							-moz-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+							-ms-box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+							box-shadow:0px 0px 19px 0px rgba(0,0,0,0.16);
+						}
+						.user-display-head{
+							margin-top:20px;
+							color:#03a9f4;
+						}
