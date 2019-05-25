@@ -24,7 +24,6 @@ const container = require('./container');
 container.resolve(function(users, lodash, admin, home, group, result, privateChat, profile, interests, news) {
 
 	mongoose.Promise = global.Promise;
-	//mongoose.connect('mongodb://localhost/chat', {'useMongoClient': true});
 	//mongoose.connect('mongodb+srv://adminDevChat:31085@devchat-c5jxu.mongodb.net/chat');
 
 	mongoose.connect(encodeURI(process.env.MONGODB_URI), {useNewUrlParser:true})
